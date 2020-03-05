@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Ipstset.WhosMcu.Api
+{
+    public class Constants
+    {
+        public const int MaxRequestLimit = 100;
+        public class Routes
+        {
+            
+            //public class Jots
+            //{
+            //    public const string GetJot = "GetJot";
+            //    public const string CreateJot = "CreateJot";
+            //    public const string UpdateJot = "UpdateJot";
+            //    public const string DeleteJot = "DeleteJot";
+            //}
+
+        }
+    }
+}
