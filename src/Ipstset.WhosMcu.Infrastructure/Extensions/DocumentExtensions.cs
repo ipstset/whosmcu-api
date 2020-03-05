@@ -22,14 +22,7 @@ namespace Ipstset.WhosMcu.Infrastructure.Extensions
                         FirstName = data.FirstName,
                         LastName = data.LastName,
                         FullName = data.FullName,
-                        //Title = data.Title,
-                        //Body = data.Body,
-                        //IsStarred = data.IsStarred,
-                        //FolderId = data.FolderId,
-                        //UserId = data.UserId,
-                        //IsPublic = data.IsPublic,
-                        //DateCreated = data.DateCreated,
-                        //DateModified = data.DateModified
+                        Movies = data.Movies
                     };
 
                 return null;
