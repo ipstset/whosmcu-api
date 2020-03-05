@@ -1,0 +1,167 @@
+﻿/*********************************************
+get_json
+*********************************************/
+BEGIN
+DROP PROCEDURE IF EXISTS [dbo].[get_json] 
+END
+GO
+
+CREATE procedure [dbo].[get_json]
+@table varchar(50),
+@id varchar(50)
+as
+
+
+if(@table = 'actor')
+begin
+	select id, [data] from [dbo].[actor] where id = @id
+end
+
+if(@table = 'movie')
+begin
+	select id, [data] from [dbo].[movie] where id = @id
+end
+
+if(@table = 'character')
+begin
+	select id, [data] from [dbo].[character] where id = @id
+end
+
+if(@table = 'mcu_actor')
+begin
+	select id, [data] from [dbo].[mcu_actor] where id = @id
+end
+
+GO
+
+/*********************************************
+get_json_all
+*********************************************/
+BEGIN
+DROP PROCEDURE IF EXISTS [dbo].[get_json_all] 
+END
+GO
+
+CREATE procedure [dbo].[get_json_all]
+@table varchar(50),
+@startAfter varchar(50) = null
+as
+
+declare @results table
+(
+row_id int,
+id varchar(50),
+[data] varchar(MAX),
+date_created datetimeoffset(7)
+)
+
+if(@table = 'actor')
+begin
+	insert into @results
+	select row_id, id, [data], date_created from [dbo].[actor]
+end
+
+if(@table = 'movie')
+begin
+	insert into @results
+	select row_id, id, [data], date_created from [dbo].[movie]
+end
+
+if(@table = 'character')
+begin
+	insert into @results
+	select row_id, id, [data], date_created from [dbo].[character]
+end
+
+if(@table = 'mcu_actor')
+begin
+	insert into @results
+	select row_id, id, [data], date_created from [dbo].[mcu_actor]
+end
+
+declare @startAfterRowId int = 0
+if(ISNULL(@startAfter,'') <> '')
+	select @startAfterRowId = row_id from @results where id = @startAfter
+
+select row_id as rowId, id, [data], date_created
+from @results 
+where row_id > @startAfterRowId
+order by row_id
+GO
+
+/*********************************************
+search_json
+*********************************************/
+BEGIN
+DROP PROCEDURE IF EXISTS [dbo].[search_json] 
+END
+GO
+
+CREATE procedure [dbo].[search_json]
+@table varchar(50),
+@searchTerm varchar(200)
+as
+
+if(@table = 'mcu_actor')
+begin
+	select id, [data] from [dbo].[mcu_actor] where search_term like '%' + @searchTerm + '%'
+end
+
+GO
+
+/*********************************************
+save_json
+*********************************************/
+BEGIN
+DROP PROCEDURE IF EXISTS [dbo].[save_json] 
+END
+GO
+
+CREATE procedure [dbo].[save_json]
+@table varchar(50),
+@id varchar(50),
+@data varchar(MAX)
+as
+
+if(@table = 'actor')
+begin
+	if (select count(id) from [dbo].[actor] where id = @id) = 0
+		insert into [dbo].[actor] (id,[data]) values (@id,@data)
+	else
+		update [dbo].[actor]
+		set [data] = @data
+		where id = @id
+end
+
+if(@table = 'movie')
+begin
+	if (select count(id) from [dbo].[movie] where id = @id) = 0
+		insert into [dbo].[movie] (id,[data]) values (@id,@data)
+	else
+		update [dbo].[movie]
+		set [data] = @data
+		where id = @id
+end
+
+if(@table = 'character')
+begin
+	if (select count(id) from [dbo].[character] where id = @id) = 0
+		insert into [dbo].[character] (id,[data]) values (@id,@data)
+	else
+		update [dbo].[character]
+		set [data] = @data
+		where id = @id
+end
+
+if(@table = 'mcu_actor')
+begin
+	if (select count(id) from [dbo].[mcu_actor] where id = @id) = 0
+		insert into [dbo].[mcu_actor] (id,[data]) values (@id,@data)
+	else
+		update [dbo].[mcu_actor]
+		set [data] = @data
+		where id = @id
+end
+
+GO
+

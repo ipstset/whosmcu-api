@@ -19,6 +19,9 @@ namespace Ipstset.WhosMcu.Infrastructure.Extensions
                     return new McuActorResponse
                     {
                         Id = data.Id,
+                        FirstName = data.FirstName,
+                        LastName = data.LastName,
+                        FullName = data.FullName,
                         //Title = data.Title,
                         //Body = data.Body,
                         //IsStarred = data.IsStarred,

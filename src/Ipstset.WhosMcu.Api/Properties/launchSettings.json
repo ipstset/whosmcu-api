@@ -13,8 +13,7 @@
       "commandName": "IISExpress",
       "launchUrl": "weatherforecast",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "WHOSMCU_CONNECTION": "none"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "Ipstset.WhosMcu.Api": {

@@ -1,0 +1,73 @@
+﻿--TABLE SCRIPTS for DBO	3/4/2020
+/*********************************************
+actor
+*********************************************/
+CREATE TABLE [dbo].[actor](
+	[row_id] [int] IDENTITY(1,1) NOT NULL,
+	[id] [varchar](50) NOT NULL,
+	[data] [varchar](max) NULL,
+	[date_created] [datetimeoffset](7) NOT NULL,
+ CONSTRAINT [PK_actor] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[actor] ADD  CONSTRAINT [DF_actor_date_created]  DEFAULT (getdate()) FOR [date_created]
+GO
+
+/*********************************************
+movie
+*********************************************/
+CREATE TABLE [dbo].[movie](
+	[row_id] [int] IDENTITY(1,1) NOT NULL,
+	[id] [varchar](50) NOT NULL,
+	[data] [varchar](max) NULL,
+	[date_created] [datetimeoffset](7) NOT NULL,
+ CONSTRAINT [PK_movie] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[movie] ADD  CONSTRAINT [DF_movie_date_created]  DEFAULT (getdate()) FOR [date_created]
+GO
+
+/*********************************************
+character
+*********************************************/
+CREATE TABLE [dbo].[character](
+	[row_id] [int] IDENTITY(1,1) NOT NULL,
+	[id] [varchar](50) NOT NULL,
+	[data] [varchar](max) NULL,
+	[date_created] [datetimeoffset](7) NOT NULL,
+ CONSTRAINT [PK_character] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[character] ADD  CONSTRAINT [DF_character_date_created]  DEFAULT (getdate()) FOR [date_created]
+GO
+
+/*********************************************
+mcu_actor
+*********************************************/
+CREATE TABLE [dbo].[mcu_actor](
+	[row_id] [int] IDENTITY(1,1) NOT NULL,
+	[id] [varchar](50) NOT NULL,
+	[data] [varchar](max) NULL,
+	[date_created] [datetimeoffset](7) NOT NULL,
+	[search_term] [varchar](500) NULL,
+ CONSTRAINT [PK_mcu_actor] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[mcu_actor] ADD  CONSTRAINT [DF_mcu_actor_date_created]  DEFAULT (getdate()) FOR [date_created]
+GO

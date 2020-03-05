@@ -25,7 +25,6 @@ namespace Ipstset.WhosMcu.Api
     public class Startup
     {
         private string _contentRoot;
-        private string _whosMcuConnection;
         public Startup(IHostEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -36,7 +35,6 @@ namespace Ipstset.WhosMcu.Api
 
             Configuration = builder.Build();
             _contentRoot = env.ContentRootPath;
-            _whosMcuConnection = Environment.GetEnvironmentVariable("WHOSMCU_CONNECTION");
         }
 
         public IConfiguration Configuration { get; }
@@ -50,8 +48,8 @@ namespace Ipstset.WhosMcu.Api
 
             var db = new DbSettings
             {
-                Connection = _whosMcuConnection,
-                Schema = Configuration["DbSettings:Schema"],
+                Connection = Configuration["ConnectionStrings:WhosMcu"],
+                Schema = "dbo",
             };
 
             services.AddTransient<IMcuActorReadOnlyRepository, McuActorReadOnlyRepository>((ctx) => new McuActorReadOnlyRepository(db));

@@ -24,16 +24,11 @@ namespace Ipstset.WhosMcu.Infrastructure.SqlData
         public async Task<QueryResult<McuActorResponse>> GetMcuActorsAsync(SearchMcuActorsRequest request)
         {
             var actors = new List<McuActorResponse>();
-            var sql = $"exec {_db.Schema}.search_json @table";
+            var sql = $"exec {_db.Schema}.search_json @table, @searchTerm";
             using (var sqlConnection = new SqlConnection(_db.Connection))
             {
-                var documents = await sqlConnection.QueryAsync<SqlDocument>(sql, new { table = "mcu_actor" });
-                foreach (var document in documents)
-                {
-                    var response = document.ToMcuActorResponse();
-                    if (response != null)
-                        actors.Add(response);
-                }
+                var documents = await sqlConnection.QueryAsync<SqlDocument>(sql, new { table = "mcu_actor", searchTerm = request.Name });
+                actors.AddRange(documents.Select(document => document.ToMcuActorResponse()).Where(response => response != null));
             }
 
             //sort
