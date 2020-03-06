@@ -1,4 +1,5 @@
-﻿using Ipstset.WhosMcu.Application.McuActors;
+﻿using Ipstset.WhosMcu.Application.Actors;
+using Ipstset.WhosMcu.Application.McuActors;
 using Ipstset.WhosMcu.Application.Movies;
 using Ipstset.WhosMcu.Infrastructure.Models;
 using Newtonsoft.Json;
@@ -46,6 +47,30 @@ namespace Ipstset.WhosMcu.Infrastructure.Extensions
                         Id = data.Id,
                         Title = data.Title,
                         ReleaseDate = data.ReleaseDate
+                    };
+
+                return null;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public static ActorResponse ToActorResponse(this SqlDocument document)
+        {
+            try
+            {
+                //parse data
+                var data = JsonConvert.DeserializeObject<ActorResponse>(document.Data);
+                if (data != null)
+                    return new ActorResponse
+                    {
+                        Id = data.Id,
+                        FullName = data.FullName,
+                        FirstName = data.FirstName,
+                        LastName = data.LastName,
+                        Src = data.Src
                     };
 
                 return null;

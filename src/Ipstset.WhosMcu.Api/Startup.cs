@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Ipstset.WhosMcu.Application.Actors;
 using Ipstset.WhosMcu.Application.Behaviors;
 using Ipstset.WhosMcu.Application.McuActors;
 using Ipstset.WhosMcu.Application.McuActors.SearchMcuActors;
@@ -60,6 +61,7 @@ namespace Ipstset.WhosMcu.Api
 
             services.AddTransient<IMcuActorReadOnlyRepository, McuActorReadOnlyRepository>((ctx) => new McuActorReadOnlyRepository(db));
             services.AddTransient<IMovieReadOnlyRepository, MovieReadOnlyRepository>((ctx) => new MovieReadOnlyRepository(db));
+            services.AddTransient<IActorReadOnlyRepository, ActorReadOnlyRepository>((ctx) => new ActorReadOnlyRepository(db));
             #endregion
 
             #region Mediatr
