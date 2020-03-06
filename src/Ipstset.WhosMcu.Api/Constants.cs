@@ -10,7 +10,7 @@ namespace Ipstset.WhosMcu.Api
         public const int MaxRequestLimit = 100;
         public class Routes
         {
-            
+
             //public class Jots
             //{
             //    public const string GetJot = "GetJot";
@@ -18,6 +18,10 @@ namespace Ipstset.WhosMcu.Api
             //    public const string UpdateJot = "UpdateJot";
             //    public const string DeleteJot = "DeleteJot";
             //}
+            public class Movies
+            {
+                public const string GetMovie = "GetMovie";
+            }
 
         }
     }

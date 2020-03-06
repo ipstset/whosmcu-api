@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Ipstset.WhosMcu.Application.Behaviors;
 using Ipstset.WhosMcu.Application.McuActors;
 using Ipstset.WhosMcu.Application.McuActors.SearchMcuActors;
+using Ipstset.WhosMcu.Application.Movies;
 using Ipstset.WhosMcu.Infrastructure.SqlData;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -58,6 +59,7 @@ namespace Ipstset.WhosMcu.Api
             };
 
             services.AddTransient<IMcuActorReadOnlyRepository, McuActorReadOnlyRepository>((ctx) => new McuActorReadOnlyRepository(db));
+            services.AddTransient<IMovieReadOnlyRepository, MovieReadOnlyRepository>((ctx) => new MovieReadOnlyRepository(db));
             #endregion
 
             #region Mediatr
