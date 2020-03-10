@@ -24,7 +24,7 @@ namespace Ipstset.WhosMcu.Infrastructure.Extensions
                         FirstName = data.FirstName,
                         LastName = data.LastName,
                         FullName = data.FullName,
-                        Movies = data.Movies
+                        Characters = data.Characters
                     };
 
                 return null;
