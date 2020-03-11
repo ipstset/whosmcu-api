@@ -8,7 +8,7 @@ namespace Ipstset.WhosMcu.Api
     public class Constants
     {
         public const int MaxRequestLimit = 100;
-        public const string SessionCookie = "wm_session";
+        public const string ApiTokenHeader = "Wm-Token";
         public class Routes
         {
 

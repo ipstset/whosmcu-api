@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using Ipstset.WhosMcu.Api.Attributes;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace Ipstset.WhosMcu.Api.Controllers
     [Route("foobars")]
     [ApiController]
     [EnableCors("CorsPolicy")]
+    [ApiToken]
     public class FoobarsController : BaseController
     {
         [HttpGet]
