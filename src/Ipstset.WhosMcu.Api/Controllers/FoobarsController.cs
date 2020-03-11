@@ -10,7 +10,7 @@ namespace Ipstset.WhosMcu.Api.Controllers
     [Route("foobars")]
     [ApiController]
     [EnableCors("CorsPolicy")]
-    public class FoobarsController : ControllerBase
+    public class FoobarsController : BaseController
     {
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()

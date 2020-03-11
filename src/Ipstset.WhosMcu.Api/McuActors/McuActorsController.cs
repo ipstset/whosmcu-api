@@ -19,7 +19,7 @@ namespace Ipstset.WhosMcu.Api.McuActors
     [Produces("application/json")]
     [EnableCors("CorsPolicy")]
     [HttpException]
-    public class McuActorsController
+    public class McuActorsController: BaseController
     {
         private readonly IMediator _mediator;
         public McuActorsController(IMediator mediator)
