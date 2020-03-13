@@ -24,6 +24,11 @@ namespace Ipstset.WhosMcu.Api
                 public const string GetMovie = "GetMovie";
             }
 
+            public class Tokens
+            {
+                public const string CreateToken = "CreateToken";
+            }
+
         }
     }
 }

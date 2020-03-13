@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Ipstset.WhosMcu.Api.ApiTokens;
+using Ipstset.WhosMcu.Api.Attributes;
 using Ipstset.WhosMcu.Application.Actors;
 using Ipstset.WhosMcu.Application.Behaviors;
 using Ipstset.WhosMcu.Application.McuActors;
@@ -28,6 +30,7 @@ namespace Ipstset.WhosMcu.Api
     {
         private string _contentRoot;
         private string _whosMcuConnection;
+        private ApiTokenSettings _apiTokenSettings;
         public Startup(IHostEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -42,6 +45,17 @@ namespace Ipstset.WhosMcu.Api
             _whosMcuConnection = env.EnvironmentName == "DevelopmentLocal" ? 
                 Configuration["ConnectionStrings:WhosMcu"] : 
                 Environment.GetEnvironmentVariable("WHOSMCU_CONNECTION");
+
+            var x = Configuration["ApiTokenSettings:Issuers"];
+            _apiTokenSettings = new ApiTokenSettings
+            {
+                Issuers = Configuration["ApiTokenSettings:Issuers"].Split(","),
+                Audiences = Configuration["ApiTokenSettings:Audiences"].Split(","),
+                MinutesToExpire = Convert.ToInt32(Configuration["ApiTokenSettings:MinutesToExpire"]),
+                Secret = env.EnvironmentName == "DevelopmentLocal" ?
+                        Configuration["ApiTokenSettings:Secret"] :
+                        Environment.GetEnvironmentVariable("API_TOKEN_SECRET")
+            };
         }
 
         public IConfiguration Configuration { get; }
@@ -63,6 +77,9 @@ namespace Ipstset.WhosMcu.Api
             services.AddTransient<IMovieReadOnlyRepository, MovieReadOnlyRepository>((ctx) => new MovieReadOnlyRepository(db));
             services.AddTransient<IActorReadOnlyRepository, ActorReadOnlyRepository>((ctx) => new ActorReadOnlyRepository(db));
             #endregion
+
+            services.AddTransient<IApiTokenManager, ApiTokenManager>((ctx) => new ApiTokenManager(_apiTokenSettings));
+            services.AddScoped<ApiTokenServiceFilter>();
 
             #region Mediatr
             services.AddMediatR(typeof(SearchMcuActorsHandler).GetTypeInfo().Assembly);

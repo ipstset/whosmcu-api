@@ -11,7 +11,7 @@ namespace Ipstset.WhosMcu.Api.Controllers
     [Route("foobars")]
     [ApiController]
     [EnableCors("CorsPolicy")]
-    [ApiToken]
+    [ServiceFilter(typeof(ApiTokenServiceFilter))]
     public class FoobarsController : BaseController
     {
         [HttpGet]
@@ -23,7 +23,8 @@ namespace Ipstset.WhosMcu.Api.Controllers
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
-            return id.ToString();
+            //return id.ToString();
+            return AppUser.SessionId;
         }
     }
 }
