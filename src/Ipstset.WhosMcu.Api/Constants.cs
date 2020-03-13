@@ -9,6 +9,8 @@ namespace Ipstset.WhosMcu.Api
     {
         public const int MaxRequestLimit = 100;
         public const string ApiTokenHeader = "Wm-Token";
+        
+
         public class Routes
         {
 
@@ -30,5 +32,14 @@ namespace Ipstset.WhosMcu.Api
             }
 
         }
+        public class HttpContextItems
+        {
+            public const string IgnoreApiTokenKey = "IgnoreApiTokenKey";
+            public const string WmSessionId = "WmSessionId";
+        }
+
+
     }
+
+    
 }

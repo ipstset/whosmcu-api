@@ -25,6 +25,7 @@ namespace Ipstset.WhosMcu.Api.ApiTokens
         /// Create api token
         /// </summary>
         /// <returns></returns>
+        [IgnoreApiToken(Order = int.MinValue)]
         [HttpPost(Name = Constants.Routes.Tokens.CreateToken)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<string>> Post()

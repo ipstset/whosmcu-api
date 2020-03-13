@@ -10,16 +10,19 @@ namespace Ipstset.WhosMcu.Api.Logging
 {
     public class RequestLog
     {
-
         public DateTime LogDate { get; set; }
         public dynamic Parameters { get; set; }
         public string Route { get; set; }
 
         public static RequestLog Create(RouteData routeData, HttpContext context)
         {
+            var sessionId = string.Empty;
+            if (context.Items.ContainsKey(Constants.HttpContextItems.WmSessionId))
+                sessionId = context.Items[Constants.HttpContextItems.WmSessionId].ToString();
+
             var parameters = new
             {
-                sessionId = AppUser.SessionId,
+                sessionId,
                 connection = new
                 {
                     id = context.Connection.Id.ToString(),

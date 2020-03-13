@@ -56,9 +56,6 @@ namespace Ipstset.WhosMcu.Api.ApiTokens
                     ValidateLifetime = true
                 };
                 handler.ValidateToken(token, param, out var validatedToken);
-
-                var jwt = (JwtSecurityToken)validatedToken;
-                AppUser.SessionId = jwt.Subject;
                 return true;
             }
             catch (SecurityTokenException ex)
