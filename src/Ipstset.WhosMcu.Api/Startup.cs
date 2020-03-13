@@ -46,7 +46,6 @@ namespace Ipstset.WhosMcu.Api
                 Configuration["ConnectionStrings:WhosMcu"] : 
                 Environment.GetEnvironmentVariable("WHOSMCU_CONNECTION");
 
-            var x = Configuration["ApiTokenSettings:Issuers"];
             _apiTokenSettings = new ApiTokenSettings
             {
                 Issuers = Configuration["ApiTokenSettings:Issuers"].Split(","),
@@ -63,7 +62,11 @@ namespace Ipstset.WhosMcu.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers(options =>
+            {
+                options.Filters.Add(typeof(ApiTokenServiceFilter));
+                options.Filters.Add(typeof(LogRequestServiceFilter));
+            });
 
             #region Repository injection
 
@@ -80,6 +83,7 @@ namespace Ipstset.WhosMcu.Api
 
             services.AddTransient<IApiTokenManager, ApiTokenManager>((ctx) => new ApiTokenManager(_apiTokenSettings));
             services.AddScoped<ApiTokenServiceFilter>();
+            services.AddScoped<LogRequestServiceFilter>();
 
             #region Mediatr
             services.AddMediatR(typeof(SearchMcuActorsHandler).GetTypeInfo().Assembly);

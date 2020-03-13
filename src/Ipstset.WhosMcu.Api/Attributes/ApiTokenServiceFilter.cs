@@ -24,18 +24,22 @@ namespace Ipstset.WhosMcu.Api.Attributes
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            //get header
+            ////get header
+            //var token = context.HttpContext.Request.Headers[Constants.ApiTokenHeader];
+            //if (string.IsNullOrEmpty(token) || !_apiTokenManager.ValidateToken(token))
+            //{
+            //    context.Result = new ObjectResult(new
+            //    {
+            //        Status = (int)HttpStatusCode.BadRequest,
+            //        Message = $"{Constants.ApiTokenHeader} request header invalid or missing"
+            //    })
+            //    { StatusCode = (int)HttpStatusCode.BadRequest };
+            //    return;
+            //}
+
             var token = context.HttpContext.Request.Headers[Constants.ApiTokenHeader];
-            if (string.IsNullOrEmpty(token) || !_apiTokenManager.ValidateToken(token))
-            {
-                context.Result = new ObjectResult(new
-                {
-                    Status = (int)HttpStatusCode.BadRequest,
-                    Message = $"{Constants.ApiTokenHeader} request header invalid or missing"
-                })
-                { StatusCode = (int)HttpStatusCode.BadRequest };
-                return;
-            }
+            if (!string.IsNullOrEmpty(token))
+                _apiTokenManager.ValidateToken(token);
         }
 
     }

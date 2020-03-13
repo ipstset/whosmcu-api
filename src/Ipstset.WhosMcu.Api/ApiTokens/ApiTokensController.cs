@@ -27,7 +27,7 @@ namespace Ipstset.WhosMcu.Api.ApiTokens
         /// <returns></returns>
         [HttpPost(Name = Constants.Routes.Tokens.CreateToken)]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<ActionResult<string>> Post([FromBody]CreateTokenModel request)
+        public async Task<ActionResult<string>> Post()
         {
             var token = _apiTokenManager.CreateToken();
             return Json(new { token });

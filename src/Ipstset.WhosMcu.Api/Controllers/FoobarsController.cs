@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 namespace Ipstset.WhosMcu.Api.Controllers
 {
     [Route("foobars")]
-    [ApiController]
     [EnableCors("CorsPolicy")]
     [ServiceFilter(typeof(ApiTokenServiceFilter))]
     public class FoobarsController : BaseController
