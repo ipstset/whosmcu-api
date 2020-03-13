@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 using Ipstset.WhosMcu.Api.Logging;
 using Ipstset.WhosMcu.Api.Attributes;
 using Ipstset.WhosMcu.Api.ApiTokens;
+using Microsoft.AspNetCore.Cors;
 
 namespace Ipstset.WhosMcu.Api.Controllers
 {
     [Route("utilities")]
     [ApiController]
+    [Produces("application/json")]
+    [EnableCors("CorsPolicy")]
     public class UtilitiesController : BaseController
     {
         private IApiTokenManager _apiTokenManager;
