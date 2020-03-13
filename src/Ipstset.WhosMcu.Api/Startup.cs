@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Ipstset.WhosMcu.Api.ApiTokens;
 using Ipstset.WhosMcu.Api.Attributes;
+using Ipstset.WhosMcu.Api.Logging;
 using Ipstset.WhosMcu.Application.Actors;
 using Ipstset.WhosMcu.Application.Behaviors;
 using Ipstset.WhosMcu.Application.McuActors;
@@ -79,6 +80,8 @@ namespace Ipstset.WhosMcu.Api
             services.AddTransient<IMcuActorReadOnlyRepository, McuActorReadOnlyRepository>((ctx) => new McuActorReadOnlyRepository(db));
             services.AddTransient<IMovieReadOnlyRepository, MovieReadOnlyRepository>((ctx) => new MovieReadOnlyRepository(db));
             services.AddTransient<IActorReadOnlyRepository, ActorReadOnlyRepository>((ctx) => new ActorReadOnlyRepository(db));
+
+            services.AddTransient<ILogRepository, LogRepository>();
             #endregion
 
             services.AddTransient<IApiTokenManager, ApiTokenManager>((ctx) => new ApiTokenManager(_apiTokenSettings));

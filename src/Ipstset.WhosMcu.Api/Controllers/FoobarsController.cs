@@ -22,8 +22,7 @@ namespace Ipstset.WhosMcu.Api.Controllers
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
-            //return id.ToString();
-            return AppUser.SessionId;
+            return id.ToString();
         }
     }
 }
