@@ -65,7 +65,7 @@ namespace Ipstset.WhosMcu.Api
         {
             services.AddControllers(options =>
             {
-                options.Filters.Add(typeof(ApiTokenServiceFilter));
+                //options.Filters.Add(typeof(ApiTokenServiceFilter));
                 options.Filters.Add(typeof(LogRequestServiceFilter));
             });
 

@@ -16,13 +16,13 @@ namespace Ipstset.WhosMcu.Api.Logging
 
         public static RequestLog Create(RouteData routeData, HttpContext context)
         {
-            var sessionId = string.Empty;
-            if (context.Items.ContainsKey(Constants.HttpContextItems.WmSessionId))
-                sessionId = context.Items[Constants.HttpContextItems.WmSessionId].ToString();
+            //var sessionId = string.Empty;
+            //if (context.Items.ContainsKey(Constants.HttpContextItems.WmSessionId))
+            //    sessionId = context.Items[Constants.HttpContextItems.WmSessionId].ToString();
 
             var parameters = new
             {
-                sessionId,
+                //sessionId,
                 connection = new
                 {
                     id = context.Connection.Id.ToString(),
