@@ -81,7 +81,7 @@ namespace Ipstset.WhosMcu.Api
             services.AddTransient<IMovieReadOnlyRepository, MovieReadOnlyRepository>((ctx) => new MovieReadOnlyRepository(db));
             services.AddTransient<IActorReadOnlyRepository, ActorReadOnlyRepository>((ctx) => new ActorReadOnlyRepository(db));
 
-            services.AddTransient<ILogRepository, LogRepository>();
+            services.AddTransient<ILogRepository, LogRepository>((ctx) => new LogRepository(db.Connection));
             #endregion
 
             services.AddTransient<IApiTokenManager, ApiTokenManager>((ctx) => new ApiTokenManager(_apiTokenSettings));
